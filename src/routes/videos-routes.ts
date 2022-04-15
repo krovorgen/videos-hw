@@ -1,8 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { videosRepository } from '../repositories/videos-repository';
-import { body, validationResult } from 'express-validator';
+import { body } from 'express-validator';
 import { inputValidatorMiddleware } from '../middlewares/input-validator-middleware';
-import { authMiddleware } from '../middlewares/auth-middleware';
 
 export const videosRouter = Router({});
 
