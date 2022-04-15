@@ -21,7 +21,7 @@ videosRouter
       res.send(404);
     }
   })
-  .put('/:id', (req: Request, res: Response) => {
+  .put('/:id', body('title').notEmpty(), inputValidatorMiddleware, (req: Request, res: Response) => {
     const idVideo = req.params.id;
     const isDeleted = videosRepository.updateVideoById(+idVideo, req.body.title);
 
@@ -29,10 +29,7 @@ videosRouter
   })
   .post(
     '/',
-    body('title')
-      .isLength({ max: 15 })
-      .withMessage('Max 15 symbols')
-      .matches(/^[\w ]*$/),
+    body('title').notEmpty(),
     inputValidatorMiddleware,
     (req: Request<{}, {}, { title: string }>, res: Response) => {
       const newVideo = videosRepository.createVideo(req.body.title);
